@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HealthcheckController } from './healthcheck/healthcheck.controller';
+import { User } from './user/user.entity';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { HealthcheckController } from './healthcheck/healthcheck.controller';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: ['dist/**/*.entity{.ts,.js}'],
+        entities: ['dist/**/*.entity{.ts,.js}', User],
         synchronize: process.env.NODE_ENV !== 'production',
       }),
       inject: [ConfigService],
