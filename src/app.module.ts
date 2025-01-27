@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HealthcheckController } from './healthcheck/healthcheck.controller';
 import { User } from './user/user.entity';
+import { Manager } from './manager/manager.entity';
+import { Supplier } from './supplier/supplier.entity';
 
 @Module({
   imports: [
@@ -20,7 +22,7 @@ import { User } from './user/user.entity';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: ['dist/**/*.entity{.ts,.js}', User],
+        entities: [User, Manager, Supplier],
         synchronize: process.env.NODE_ENV !== 'production',
       }),
       inject: [ConfigService],
