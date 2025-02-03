@@ -19,3 +19,4 @@ export class HealthcheckController {
     return JSON.stringify(info);
   }
 }
+// terminus dla zweryfikowania polaczenia z baza danych
