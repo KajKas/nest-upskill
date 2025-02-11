@@ -1,22 +1,23 @@
 import { Controller, Get, Header } from '@nestjs/common';
+import {
+  HealthCheck,
+  HealthCheckService,
+  TypeOrmHealthIndicator,
+} from '@nestjs/terminus';
 
 @Controller('healthcheck')
 export class HealthcheckController {
+  constructor(
+    private health: HealthCheckService,
+    private db: TypeOrmHealthIndicator,
+  ) {}
+
   @Get()
   @Header('Content-Type', 'application/json')
-  findAll(): string {
-    const statusCode = 200;
-    const statusText = 'OK';
-
-    const info = {
-      message: 'hello upskill!',
-      status: {
-        statusCode,
-        statusText,
-      },
-    };
-
-    return JSON.stringify(info);
+  @HealthCheck()
+  check() {
+    return this.health.check([
+      () => this.db.pingCheck('database', { timeout: 300 }),
+    ]);
   }
 }
-// terminus dla zweryfikowania polaczenia z baza danych
