@@ -2,15 +2,15 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { validateOrReject, ValidationError } from 'class-validator';
 import { BadRequestException } from '@nestjs/common';
 
-import { Supplier } from '../supplier.entity';
+import { Manager } from '../manager.entity';
 
-import { CreateSupplierCommand } from './create-supplier.command';
+import { CreateManagerCommand } from './create-manager.command';
 
-@CommandHandler(CreateSupplierCommand)
+@CommandHandler(CreateManagerCommand)
 export class CreateSupplierHandler
-  implements ICommandHandler<CreateSupplierCommand>
+  implements ICommandHandler<CreateManagerCommand>
 {
-  async execute(command: CreateSupplierCommand): Promise<Supplier> {
+  async execute(command: CreateManagerCommand): Promise<Manager> {
     try {
       await validateOrReject(command);
     } catch (errors) {
@@ -26,10 +26,10 @@ export class CreateSupplierHandler
       });
     }
 
-    const supplier = new Supplier();
+    const supplier = new Manager();
     supplier.name = command.name;
     supplier.email = command.email;
-    supplier.managers = command.managers;
+    supplier.suppliers = command.suppliers;
 
     // await this.supplierRepository.save(supplier);
 

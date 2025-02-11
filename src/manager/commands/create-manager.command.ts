@@ -9,7 +9,7 @@ import {
   ValidationError,
 } from 'class-validator';
 
-export class CreateSupplierCommand {
+export class CreateManagerCommand {
   @IsString()
   @Length(2, 100)
   readonly name: string;
@@ -21,12 +21,12 @@ export class CreateSupplierCommand {
   @IsArray()
   @IsNumber({}, { each: true })
   @Min(1, { each: true })
-  readonly managers: number[];
+  readonly suppliers: number[];
 
-  constructor(payload: { name: string; email: string; managers: number[] }) {
+  constructor(payload: { name: string; email: string; suppliers: number[] }) {
     this.name = payload.name;
     this.email = payload.email;
-    this.managers = payload.managers;
+    this.suppliers = payload.suppliers;
   }
 
   async validate(): Promise<ValidationError[]> {

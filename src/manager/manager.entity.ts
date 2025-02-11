@@ -20,5 +20,5 @@ export class Manager {
 
   @ManyToMany(() => Supplier, (supplier) => supplier.managers)
   @JoinTable()
-  suppliers: Supplier[];
+  suppliers: number[];
 }
