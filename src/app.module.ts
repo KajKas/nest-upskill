@@ -8,6 +8,7 @@ import { HealthcheckModule } from './healthcheck/healthcheck.module';
 import { User } from './user/user.entity';
 import { Manager } from './manager/manager.entity';
 import { Supplier } from './supplier/supplier.entity';
+import { SupplierModule } from './supplier/supplier.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { Supplier } from './supplier/supplier.entity';
       inject: [ConfigService],
     }),
     HealthcheckModule,
+    SupplierModule,
   ],
   controllers: [AppController],
   providers: [AppService],

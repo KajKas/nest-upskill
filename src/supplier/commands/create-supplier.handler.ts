@@ -1,8 +1,12 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { validateOrReject, ValidationError } from 'class-validator';
-import { BadRequestException } from '@nestjs/common';
+import {
+  BadRequestException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 
 import { Supplier } from '../supplier.entity';
+import { SupplierRepository } from '../supplier.repository';
 
 import { CreateSupplierCommand } from './create-supplier.command';
 
@@ -10,6 +14,8 @@ import { CreateSupplierCommand } from './create-supplier.command';
 export class CreateSupplierHandler
   implements ICommandHandler<CreateSupplierCommand>
 {
+  constructor(private readonly supplierRepository: SupplierRepository) {}
+
   async execute(command: CreateSupplierCommand): Promise<Supplier> {
     try {
       await validateOrReject(command);
@@ -31,8 +37,13 @@ export class CreateSupplierHandler
     supplier.email = command.email;
     supplier.managers = command.managers;
 
-    // await this.supplierRepository.save(supplier);
-
-    return supplier;
+    try {
+      return await this.supplierRepository.save(supplier);
+    } catch (error) {
+      throw new InternalServerErrorException(
+        'Failed to create supplier',
+        error,
+      );
+    }
   }
 }

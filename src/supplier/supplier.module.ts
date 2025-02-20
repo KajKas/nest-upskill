@@ -6,12 +6,14 @@ import { Supplier } from './supplier.entity';
 import { SupplierController } from './supplier.controller';
 import { ManagerService } from './supplier.service';
 import { CreateSupplierHandler } from './commands/create-supplier.handler';
+import { SupplierRepository } from './supplier.repository';
 
 const CommandHandlers = [CreateSupplierHandler];
 
 @Module({
   imports: [TypeOrmModule.forFeature([Supplier]), CqrsModule],
   controllers: [SupplierController],
-  providers: [ManagerService, ...CommandHandlers],
+  providers: [ManagerService, ...CommandHandlers, SupplierRepository],
+  exports: [SupplierRepository],
 })
-export class ManagerModule {}
+export class SupplierModule {}
