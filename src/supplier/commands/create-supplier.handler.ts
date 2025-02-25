@@ -38,7 +38,7 @@ export class CreateSupplierHandler
     supplier.managers = command.managers;
 
     try {
-      return await this.supplierRepository.save(supplier);
+      return await this.supplierRepository.createSupplier(supplier);
     } catch (error) {
       throw new InternalServerErrorException(
         'Failed to create supplier',
