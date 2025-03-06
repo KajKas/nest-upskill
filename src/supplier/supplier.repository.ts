@@ -10,22 +10,24 @@ export class SupplierRepository extends Repository<Supplier> {
 
   async findByName(name: string): Promise<Supplier[]> {
     return this.createQueryBuilder('supplier')
-      .where('supplier.name ILIKE :name', { name: `%${name}%` })
+      .where('supplier.name LIKE :name', { name: `%${name}%` })
       .getMany();
   }
 
   async customSave(supplier: Supplier): Promise<Supplier> {
-    const queryBuilder = this.createQueryBuilder()
-      .insert()
-      .into(Supplier)
-      .values(supplier);
-
     if (supplier.id) {
-      queryBuilder.orUpdate(['name', 'email', 'managers'], ['id']);
+      await this.update(supplier.id, {
+        name: supplier.name,
+        email: supplier.email,
+      });
+      return this.findOneBy({ id: supplier.id });
+    } else {
+      const result = await this.insert({
+        name: supplier.name,
+        email: supplier.email,
+      });
+      return this.findOneBy({ id: result.identifiers[0].id });
     }
-
-    await queryBuilder.execute();
-    return supplier;
   }
 
   async createSupplier(supplierData: Partial<Supplier>): Promise<Supplier> {
@@ -37,12 +39,12 @@ export class SupplierRepository extends Repository<Supplier> {
     id: number,
     supplierData: Partial<Supplier>,
   ): Promise<Supplier> {
-    await this.update(id, supplierData);
+    await this.update({ id }, supplierData);
     return this.findOneBy({ id });
   }
 
   async deleteSupplier(id: number): Promise<boolean> {
-    const result = await this.delete(id);
+    const result = await this.delete({ id });
     return result.affected > 0;
   }
 }

@@ -18,7 +18,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "NODE_ENV=test jest --config ./test/jest-e2e.json",
     "start:db": "docker run --name mysql -e MYSQL_ROOT_PASSWORD=silnehaslo -e MYSQL_DATABASE=mojabaza -e MYSQL_ROOT_HOST=% -p 3306:3306 --platform linux/amd64 -d mysql:8.0"
   },
   "dependencies": {
@@ -29,7 +29,9 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/terminus": "^11.0.0",
     "@nestjs/typeorm": "^11.0.0",
+    "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "dotenv": "^16.4.7",
     "mysql2": "^3.12.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",

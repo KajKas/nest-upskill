@@ -5,7 +5,7 @@ import {
   ManyToMany,
   JoinTable,
 } from 'typeorm';
-import { Supplier } from 'src/supplier/supplier.entity';
+import { Supplier } from '../supplier/supplier.entity';
 
 @Entity()
 export class Manager {
