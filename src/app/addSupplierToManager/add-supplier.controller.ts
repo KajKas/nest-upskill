@@ -4,7 +4,7 @@ import { Manager } from 'src/infrastructure/manager/manager.entity';
 import { AddSuppliersCommand } from './add-suppliers.command';
 
 @Controller('managers')
-export class ManagerController {
+export class AddSupplierToManagerController {
   constructor(private readonly commandBus: CommandBus) {}
 
   @Patch(':id/suppliers')

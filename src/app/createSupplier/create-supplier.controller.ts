@@ -1,9 +1,4 @@
-import {
-  Body,
-  Controller,
-  Post,
-  BadRequestException,
-} from '@nestjs/common';
+import { Body, Controller, Post, BadRequestException } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { CreateSupplierCommand } from './create-supplier.command';
 import { Supplier } from '../../infrastructure/supplier/supplier.entity';
