@@ -8,6 +8,7 @@ import {
   validate,
   ValidationError,
 } from 'class-validator';
+import { Supplier } from '../../infrastructure/supplier/supplier.entity';
 
 export class CreateSupplierCommand {
   @IsString()
@@ -23,10 +24,10 @@ export class CreateSupplierCommand {
   @Min(1, { each: true })
   readonly managers: number[];
 
-  constructor(payload: { name: string; email: string; managers: number[] }) {
-    this.name = payload.name;
-    this.email = payload.email;
-    this.managers = payload.managers;
+  constructor(public readonly data: Partial<Supplier>) {
+    this.name = data.name || '';
+    this.email = data.email || '';
+    this.managers = data.managers || [];
   }
 
   async validate(): Promise<ValidationError[]> {

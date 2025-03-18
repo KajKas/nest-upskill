@@ -4,4 +4,3 @@ export class AddManagersCommand {
     public readonly managers: number[],
   ) {}
 }
-// walidacja id do stringa

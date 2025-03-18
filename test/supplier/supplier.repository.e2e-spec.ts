@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { SupplierRepository } from '../../src/supplier/supplier.repository';
-import { Supplier } from '../../src/supplier/supplier.entity';
-import { Manager } from '../../src/manager/manager.entity';
+import { SupplierRepository } from '../../src/domain/suppliers/supplier.repository';
+import { Supplier } from '../../src/infrastructure/supplier/supplier.entity';
+import { Manager } from '../../src/infrastructure/manager/manager.entity';
 import { testDbConfig } from '../test-db.config';
 
 describe('SupplierRepository', () => {

@@ -1,6 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Supplier } from '../src/supplier/supplier.entity';
-import { Manager } from '../src/manager/manager.entity';
+import { Supplier } from '../src/infrastructure/supplier/supplier.entity';
+import { Manager } from '../src/infrastructure/manager/manager.entity';
 
 export const testDbConfig: TypeOrmModuleOptions = {
   type: 'mysql',

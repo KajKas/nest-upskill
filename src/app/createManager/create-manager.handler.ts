@@ -2,7 +2,7 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { validateOrReject, ValidationError } from 'class-validator';
 import { BadRequestException } from '@nestjs/common';
 
-import { Manager } from '../manager.entity';
+import { Manager } from '../../infrastructure/manager/manager.entity';
 
 import { CreateManagerCommand } from './create-manager.command';
 

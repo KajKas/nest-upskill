@@ -2,20 +2,20 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Manager } from './manager.entity';
+import { Supplier } from '../../infrastructure/supplier/supplier.entity';
 
 @Injectable()
 export class ManagerService {
   constructor(
-    @InjectRepository(Manager)
-    private usersRepository: Repository<Manager>,
+    @InjectRepository(Supplier)
+    private usersRepository: Repository<Supplier>,
   ) {}
 
-  findAll(): Promise<Manager[]> {
+  findAll(): Promise<Supplier[]> {
     return this.usersRepository.find();
   }
 
-  findOne(id: number): Promise<Manager | null> {
+  findOne(id: number): Promise<Supplier | null> {
     return this.usersRepository.findOneBy({ id });
   }
 

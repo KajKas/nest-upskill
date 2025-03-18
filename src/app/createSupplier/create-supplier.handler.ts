@@ -5,8 +5,8 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 
-import { Supplier } from '../supplier.entity';
-import { SupplierRepository } from '../supplier.repository';
+import { Supplier } from 'src/infrastructure/supplier/supplier.entity';
+import { SupplierRepository } from 'src/domain/suppliers/supplier.repository';
 
 import { CreateSupplierCommand } from './create-supplier.command';
 
